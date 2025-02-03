@@ -40,7 +40,7 @@ public class PizzaServiceImpl implements PizzaService{
 
     @Override
     public int deletePizza(int id) {
-        return pizzaMapper.deletePizza(id);
+        return pizzaMapper.deletePizza(id); //mapper에 저장된 delete sql 구문 사용
     }
 
 }

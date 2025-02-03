@@ -1,9 +1,7 @@
 package kh.academy.Pizza.controller;
 
 import kh.academy.Pizza.dto.Pizza;
-import kh.academy.Pizza.service.PizzaService;
 import kh.academy.Pizza.service.PizzaServiceImpl;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +20,11 @@ public class PizzaApiController {
         return pizzaService.getAllPizza();
     }
 
-//    //메뉴 상세조회
-//    @GetMapping("/pizzas/{id}")
-//    public getPizzaDetail(){
-//        return pizzaService. ();
-//    }
+    //메뉴 상세조회
+    @GetMapping("/pizzas/{id}")
+    public Pizza pizzaDetail(@PathVariable int id) {
+        return pizzaService.selectById(id);
+    }
 
 
     //메뉴 추가
@@ -36,15 +34,14 @@ public class PizzaApiController {
     }
 
     //메뉴 수정
-    @PostMapping("/pizzas/{id}")
+    @PutMapping("/pizzas/{id}")
     public void updatePizza(@PathVariable int id, @RequestBody Pizza pizza) {
-
+        pizzaService.updatePizza(pizza);
     }
-
 
     //메뉴 삭제
     @DeleteMapping("/pizzas/{id}")
     public void deletePizza(@PathVariable int id) {
-
+        pizzaService.deletePizza(id);
     }
 }
