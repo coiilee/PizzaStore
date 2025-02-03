@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피자 메뉴 관리</title>
+    <link rel="stylesheet" href="/css/pizza-style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<!--//각 항목은 이름, 가격, 이미지가 포함되어야 하며, 수정 및 삭제 버튼이 있어야 합니다-->
+<div class="container">
+    <h1>피자 메뉴</h1>
+    <table id="pizza-list">
+        <thead>
+        <tr>
+            <th>이름</th>
+            <th>가격</th>
+            <th>설명</th>
+            <th>이미지</th>
+            <th>액션</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- JQuery로 데이터 추가 -->
+        </tbody>
+    </table>
+    <a href="/add-pizza.html">메뉴 추가</a>
+</div>
+<script>
+    $.ajax({
+        url: '/api/pizzas',
+        method: "GET",
+        success: function (data) {
+
+            $.each(data, function (index, value) {
+
+                $('#pizza-list tbody').append(`
+                        <tr>
+                            <td>${value.name}</td>
+                            <td>${value.price}</td>
+                            <td>${value.description}</td>
+                            <td><img src="${value.image ? value.image : 'images/default-pizza.png'}"style="width: 50px;"></td>
+                            <td>
+                                <a href="/pizzas/edit">수정</a>
+                                <button >삭제</button>
+                            </td>
+                        </tr>
+                    `);
+            })
+
+        },
+        error: function (error) {
+            alert("백엔드에서 데이터를 불러오는데 문제가 발생했습니다.");
+        }
+    });
+
+</script>
+</body>
+</html>

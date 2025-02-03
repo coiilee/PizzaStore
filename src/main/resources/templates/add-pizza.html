@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+    <title>Title</title>
+    <link rel=”icon” href="/css/pizza-style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+<body>
+<!--새 피자를 추가할 수 있는 입력 폼을 제공합니다.-->
+<div class="addPizza">
+    <form id="addPizza" class="addPizza">
+        <h1>피자 추가하기</h1>
+
+        <label for="pizzaName">피자 이름 : </label>
+        <input type="text" id="pizzaName" name="pizzaName" required>
+
+        <label for="pizzaPrice">가격 : </label>
+        <input type="number" id="pizzaPrice" name="pizzaPrice" required>
+
+        <label for="pizzaDes">설명 : </label>
+        <input type="text" id="pizzaDes" name="pizzaDes" required>
+
+        <label for="pizzaImg">이미지 추가: </label>
+        <input type="file" id="pizzaImg" name="pizzaImg">
+
+        <button type="submit">저장하기</button>
+    </form>
+</div>
+
+<script>
+
+    $('#addPizza').submit(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: '/api/pizzas',
+            method: "POST",
+            contentType: 'application/json',
+            data: JSON.stringify({
+                name: $('#pizzaName').val(),
+                price: $('#pizzaPrice').val(),
+                description: $('#pizzaDes').val(),
+                pizzaImg: $('#pizzaImg').val()
+            }),
+            success: function (data){
+                alert("메뉴 추가에 성공했습니다.");
+                window.location.href = "/pizzas";
+            },
+            error: function (error){
+                alert("데이터를 추가하는데 오류가 발생했습니다.");
+            }
+
+        })
+
+    })
+</script>
+</body>
+</html>

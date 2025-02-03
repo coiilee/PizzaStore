@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kh.academy.Pizza.mapper.PizzaMapper">
+
+
+    <select id="getAllPizza">
+        SELECT *
+        FROM PIZZAMENU
+    </select>
+
+    <select id="addPizza">
+        INSERT INTO pizzamenu (name,price,description,image_path)
+        VALUES (#{name},#{price},#{description},#{imagePath})
+    </select>
+
+    <update id="editPizza">
+        UPDATE PIZZAMENU
+        SET
+            id = #{id},
+            name = #{name},
+            price = #{price},
+            description = #{description},
+            image_path= #{imagePath}
+        WHERE id = #{id}
+    </update>
+
+
+
+</mapper>
