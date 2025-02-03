@@ -71,6 +71,7 @@
         formData.append("price", price);
         formData.append("description", description);
         formData.append("imagePath", imagePath);
+
         $.ajax({
             url: `/api/pizzas/${id}`,
             method: "PUT",

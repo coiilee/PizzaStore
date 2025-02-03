@@ -21,7 +21,7 @@
     </insert>
 
     <update id="updatePizza">
-        UPDATE PIZZAMENU
+        UPDATE pizzamenu
         SET
             id = #{id},
             name = #{name},
