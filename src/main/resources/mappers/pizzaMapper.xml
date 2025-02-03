@@ -15,12 +15,12 @@
     WHERE id = #{id}
     </select>
 
-    <select id="addPizza">
+    <insert id="insertPizza">
         INSERT INTO pizzamenu (name,price,description,image_path)
         VALUES (#{name},#{price},#{description},#{imagePath})
-    </select>
+    </insert>
 
-    <update id="editPizza">
+    <update id="updatePizza">
         UPDATE PIZZAMENU
         SET
             id = #{id},

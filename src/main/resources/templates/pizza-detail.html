@@ -2,11 +2,10 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+    <meta name="viewport" content="width=device-width" , initial-scale=1.0”>
     <title>피자 상세보기</title>
-    <link rel=”icon” href="/css/pizza-style.css">
-
-    <script src=”https://code.jquery.com/jquery-3.7.1.min.js></script>
+    <link rel="icon" href="/css/pizza-style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <!--특정 피자 메뉴의 상세 정보를 보여줍니다.-->
@@ -16,13 +15,13 @@
 
     <div id="pizza-detail">
         <img class="pizza-img" src="/images/default-pizza.png" id="pizza-img">
-        <p><strong>이름 : </strong><span id="pizza-name"></span> </p>
-        <p><strong>가격 : </strong><span id="pizza-price"></span> </p>
-        <p><strong>설명 : </strong><span id="pizza-description"></span> </p>
+        <p><strong>이름 : </strong><span id="pizza-name"></span></p>
+        <p><strong>가격 : </strong><span id="pizza-price"></span></p>
+        <p><strong>설명 : </strong><span id="pizza-description"></span></p>
     </div>
 
     <div class="buttons">
-        <a id="edit-button" class="btn" href="">수정</a>
+        <a id="edit-button" class="btn" href="/pizzas/edit">수정</a>
         <button id="delete-button" class="btn">삭제</button>
         <a href="/pizzas" class="btn">목록으로 이동하기</a>
     </div>
@@ -33,20 +32,45 @@
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id"); //id 키를 이용해 값을 가져오기
 
+    //상세보기 url 설정
     $.ajax({
-        url: 'api/pizzas/'+id,
+        url: `/api/pizzas/${id}`,
         method: "GET",
-        success: function (data){
+        success: function (data) {
             $("#pizza-name").text(data.name);
             $("#pizza-price").text(data.price);
             $("#pizza-description").text(data.description);
+            $('#edit-button').attr("href",`/pizzas/edit?id=${id}`);
         },
-        error: function (data){
+        error: function (data) {
             alert("데이터를 가져오는데 문제가 발생했습니다");
             //피자 목록으로 돌려보내기
             window.location.href = "/pizzas";
         }
     })
+
+        //삭제 url 설정
+        $('#delete-button').click(function () {
+            if (confirm("정말 삭제하시겠습니까?")) {
+                $.ajax({
+                    url: `/api/pizzas/${id}`,
+                    method: 'DELETE',
+                    success: function (data) {
+                        alert("선택하신 피자가 삭제되었습니다.");
+                        window.location.href = "/pizzas";
+                    },
+                    error: function (data) {
+                        alert("피자를 삭제하는데 문제가 발생했습니다.");
+                    }
+                })
+            }
+        })
+
+    //수정하기 url로 이동하기
+    $('#edit-button').click(function (){
+        window.location.href = `api/pizzas/edit?id=${id}`;
+    })
+
 
 </script>
 </body>

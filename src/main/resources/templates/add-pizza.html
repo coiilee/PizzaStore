@@ -2,9 +2,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
-    <link rel=”icon” href="/css/pizza-style.css">
+    <link rel="icon" href="/css/pizza-style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </head>
@@ -15,16 +15,16 @@
         <h1>피자 추가하기</h1>
 
         <label for="pizzaName">피자 이름 : </label>
-        <input type="text" id="pizzaName" name="pizzaName" required>
+        <input type="text" id="pizzaName" name="name" required>
 
         <label for="pizzaPrice">가격 : </label>
-        <input type="number" id="pizzaPrice" name="pizzaPrice" required>
+        <input type="number" id="pizzaPrice" name="price" required>
 
         <label for="pizzaDes">설명 : </label>
-        <input type="text" id="pizzaDes" name="pizzaDes" required>
+        <input type="text" id="pizzaDes" name="description" required>
 
         <label for="pizzaImg">이미지 추가: </label>
-        <input type="file" id="pizzaImg" name="pizzaImg">
+        <input type="file" id="pizzaImg" name="imagePath">
 
         <button type="submit">저장하기</button>
     </form>
@@ -45,11 +45,11 @@
                 description: $('#pizzaDes').val(),
                 pizzaImg: $('#pizzaImg').val()
             }),
-            success: function (data){
+            success: function (data) {
                 alert("메뉴 추가에 성공했습니다.");
                 window.location.href = "/pizzas";
             },
-            error: function (error){
+            error: function (error) {
                 alert("데이터를 추가하는데 오류가 발생했습니다.");
             }
 
