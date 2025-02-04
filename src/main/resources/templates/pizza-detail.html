@@ -14,7 +14,7 @@
     <h1>피자 상세정보</h1>
 
     <div id="pizza-detail">
-        <img class="pizza-img" src="/images/default-pizza.png" id="pizza-img">
+        <img class="pizza-img" src="/uploaded/" id="pizza-img">
         <p><strong>이름 : </strong><span id="pizza-name"></span></p>
         <p><strong>가격 : </strong><span id="pizza-price"></span></p>
         <p><strong>설명 : </strong><span id="pizza-description"></span></p>
@@ -40,6 +40,13 @@
             $("#pizza-name").text(data.name);
             $("#pizza-price").text(data.price);
             $("#pizza-description").text(data.description);
+            //피자 이미지가 db에 존재할 경우 img src 변경
+            if (data.image) {
+                $("#pizza-img").attr("src", data.image);
+            } else {
+                // 이미지가 없을 경우 기본 이미지 설정
+                $("#pizza-img").attr("src", "/images/default-pizza.png");
+            }
             $('#edit-button').attr("href",`/pizzas/edit?id=${id}`);
         },
         error: function (data) {

@@ -59,9 +59,9 @@ public class PizzaServiceImpl implements PizzaService {
         pizza.setName(name);
         pizza.setPrice(price);
         pizza.setDescription(description);
-        pizza.setImagePath(uploadImg+uniqueFileName);
+        pizza.setImagePath("/uploaded/"+uniqueFileName);
 
-
+        return pizzaMapper.insertPizza(pizza);
 
     }
 
@@ -96,7 +96,7 @@ public class PizzaServiceImpl implements PizzaService {
 
         try {// 일단은 사용자 컴퓨터에서 이미지 데이터를 가져와 우리 회사 컴퓨터에 저장해보자 !
 //            File file = new File(imagePath.getOriginalFilename()); //프로젝트 폴더 내에 클라이언트에서 가져온 파일이름  저장
-            File file = new File(uploadImg +uuid+ fileExtension); //이미지 저장할 경로와 uuid로 변경한 파일이름 +사용자가 저장한 파일 형식
+            File file = new File(uploadImg +"/"+uuid+ fileExtension); //이미지 저장할 경로와 uuid로 변경한 파일이름 +사용자가 저장한 파일 형식
 
             //사용자에게서 가져온 파일을 저장하겠다.(회사 컴퓨터에서 uuid로 만든 랜덤이름으로)
             imagePath.transferTo(file);//transferTo() 사용시에는 try-catch 감싸줘야함
