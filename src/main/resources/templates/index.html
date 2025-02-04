@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>잡화점</title>
-    <link rel="icon" href="/css/pizza-style.css">
+    <link rel="icon" href="/favicon.ico">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <a href="/pizzas">피자 메뉴 보기</a>
+        <a href="/pizzas" class="btn">피자 메뉴 보기</a>
+        <img id="kakaoLogin" src="/images/kakao_login_large_narrow.png">
+        <button id="" class=""></button>
     </div>
+
+<script>
+    $("#kakaoLogin").click(function (){
+        $.ajax({
+            url:'/oauth/kakao/login', //redirect URI에 작성한 주소에서 8080 포트 뒤에 작성된 주소값 설정
+            method: 'GET',
+            success: function (data){
+                console.log("data : " + data);
+                window.location.href= data;
+            },
+            error: function (){
+                alert("카카오 개발센터 > 내 어플리케이션 > 제품설정 > 카카오로그인에서 Redirect URI를 확인하세요.");
+            }
+        })
+    })
+</script>
 </body>
 </html>
