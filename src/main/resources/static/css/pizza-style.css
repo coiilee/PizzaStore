@@ -108,3 +108,9 @@ textarea {
 .btn[href]:hover {
     background-color: #138496;
 }
+
+.container #kakaoLogin, .container #naverLogin {
+    width: 300px;
+    display: block;
+
+}

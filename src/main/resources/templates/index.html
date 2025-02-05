@@ -5,26 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>잡화점</title>
     <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/pizza-style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        .container #kakaoLogin, .container #naverLogin {
+            width: 300px;
+            display: block;
+
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <a href="/pizzas" class="btn">피자 메뉴 보기</a>
-        <img id="kakaoLogin" src="/images/kakao_login_large_narrow.png">
-        <button id="" class=""></button>
-    </div>
+<div class="container">
+    <a href="/pizzas" class="btn">피자 메뉴 보기</a>
+    <img id="kakaoLogin" src="/images/kakao_login_large_narrow.png">
+    <img id="naverLogin" src="/images/naverBtn.png">
+
+</div>
 
 <script>
-    $("#kakaoLogin").click(function (){
+    $("#kakaoLogin").click(function () {
         $.ajax({
-            url:'/oauth/kakao/login', //redirect URI에 작성한 주소에서 8080 포트 뒤에 작성된 주소값 설정
+            url: '/oauth/kakao/login', //redirect URI에 작성한 주소에서 8080 포트 뒤에 작성된 주소값 설정
             method: 'GET',
-            success: function (data){
+            success: function (data) {
                 console.log("data : " + data);
-                window.location.href= data;
+                window.location.href = data;
             },
-            error: function (){
+            error: function () {
                 alert("카카오 개발센터 > 내 어플리케이션 > 제품설정 > 카카오로그인에서 Redirect URI를 확인하세요.");
+            }
+        })
+    })
+
+    $("#naverLogin").click(function () {
+        $.ajax({
+            url: '/oauth/naver/login', //redirect URI에 작성한 주소에서 8080 포트 뒤에 작성된 주소값 설정
+            method: 'GET',
+            success: function (data) {
+                console.log("data : " + data);
+                window.location.href = data;
+            },
+            error: function () {
+                alert("네이버 개발센터 > 내 어플리케이션 > API설정 > 네이버 로그인에서 Callback url을 확인하세요.");
             }
         })
     })

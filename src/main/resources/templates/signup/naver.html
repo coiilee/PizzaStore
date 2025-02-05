@@ -5,9 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/pizza-style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+<div class="container">
+    <h1>회원가입</h1>
+    <label for="name">이름</label>
+    <input type="text" id="name" name="name" disabled>
 
+    <label for="nickname">닉네임</label>
+    <input type="text" id="nickname" name="nickname" disabled>
+
+    <label for="email">이메일</label>
+    <input type="email" name="email" id="email" disabled>
+
+    <label for="password">비밀번호</label>
+    <input type="password" name="password" id="password">
+
+    <label for="gender">성별</label>
+    <input type="text" name="gender" id="gender" disabled>
+
+    <label for="birthday">생일</label>
+    <input type="text" name="birthday" id="birthday" disabled>
+
+    <label for="profileImage">프로필 이미지</label>
+    <input type="file" name="profileImage" id="profileImage">
+
+    <button type="button" id="signup" class="btn">가입하기</button>
+</div>
+
+<script>
+    //const = 상수 = 최초로 작성한 값 변형 X
+    //let   = 변수 = 변수 내에 작성한 값 변경 O
+    const param = new URLSearchParams(window.location.search);
+    const nickname = param.get('nickname');
+    const name = param.get('name');
+    const email = param.get('email');
+    const profileImage = param.get('profileImage');
+    let gender = param.get('gender');
+    const birthday = param.get('birthday');
+
+    if(gender){
+        //성별로 들어온 값을 소문자처리, 만약 f 라면 Female로 처리, f가 아닌데 m 이라면 Male 처리 f, m 둘다 아닐경우 뭔지 확인하기 위해 gender 처리
+        gender = gender.toLowerCase() === 'f' ? 'Female' : (gender.toLowerCase() === 'm' ? 'Male' : gender);
+    }
+
+    //만약 성별이 f로 들어올 때
+    if(gender === 'f'){
+        gender = gender.toLowerCase().replace('f','female'); //toLowerCase 사용이유: 대소문자 구분 없이 f로 처리하겠다
+    }
+    //만약 성별이 m으로 들어올 때
+    if(gender === 'm'){
+        gender = gender.replace('m','male');
+    }
+
+    $('#nickname').val(decodeURIComponent(nickname)); //한글 깨짐 없이 uri 가져오기
+    $('#name').val(decodeURIComponent(name)); //한글 깨짐 없이 uri 가져오기
+    $('#email').val((email));
+    $('#profileImage').attr('src', param.get('profileImage'));
+    $('#gender').val((gender));
+    $('#birthday').val((birthday));
+</script>
 </body>
 </html>
