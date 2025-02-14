@@ -114,7 +114,7 @@ public class PizzaServiceImpl implements PizzaService {
             //DB에 경로를 추가할 때는 WebConfig에 작성한 fake 경로를 파일명 앞에 작성해주기
             //예를 들어 webconfig에서 C://pizza-image/ 경로를 /uploaded/ 라는 경로로 읽도록 설정
             //DB에 가짜이미지경로 + 파일명 + 확장명
-            pizza.setImagePath(uploadImg +uuid+ fileExtension);//imagePath.getOriginalFilename() -> uuid로 작성된 파일명 설정
+            pizza.setImagePath(uploadImg + uuid + fileExtension);//imagePath.getOriginalFilename() -> uuid로 작성된 파일명 설정
 
 //            return pizzaMapper.updatePizza(id,name,price,description,imagePath);
               return pizzaMapper.updatePizza(pizza);
@@ -122,7 +122,7 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
         @Override
-        public int deletePizza ( int id){
+        public int deletePizza (int id){
             return pizzaMapper.deletePizza(id); //mapper에 저장된 delete sql 구문 사용
         }
 

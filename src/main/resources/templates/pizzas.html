@@ -40,7 +40,7 @@
                             <td>${value.name}</td>
                             <td>${value.price}</td>
                             <td>${value.description}</td>
-                            <td><img src="${value.image ? value.image : 'images/default-pizza.png'}"style="width: 50px;"></td>
+                            <td><img src="${value.imagePath ? value.imagePath : 'images/default-pizza.png'}"style="width: 50px;"></td>
                             <td>
                                 <a href="/pizzas/detail?id=${value.id}">상세보기</a>
                                 <a href="/pizzas/edit?id=${value.id}">수정</a>
