@@ -1,15 +1,16 @@
 package kh.academy.Pizza.mapper;
 
-import org.apache.catalina.User;
+import kh.academy.Pizza.dto.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
 
-    //유저 로그인 정보 가져올 것
 
-    User findUserId(String userId);
-    User loginUser(String userId, String password);
+    // 유저 로그인 유저 정보를 가져올 것
+    User findUserId(@Param("userId") String userId);
+    User loginUser(@Param("userId")String userId, @Param("password")String password);
     /*
        만약에 값이 달라서 발생하는 오류라며 아래와 같은 명칭 변경 요청
        컬럼명  /  변수명 /     파       라    미     터    명   칭       /   name 에 작성한 변수이름 이나 상태 관리 명칭

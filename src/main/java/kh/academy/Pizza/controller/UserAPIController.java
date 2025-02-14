@@ -2,9 +2,10 @@ package kh.academy.Pizza.controller;
 
 
 import jakarta.servlet.http.HttpSession;
+import kh.academy.Pizza.dto.User;
 import kh.academy.Pizza.service.UserService;
 import kh.academy.Pizza.service.UserServiceImpl;
-import org.apache.catalina.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,14 @@ import java.util.Map;
 @RequestMapping("/api/user")
 public class UserAPIController {
 
+
     @Autowired
     private UserServiceImpl userService;
 
-
+    @PostMapping("/login")
     // 로그인
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody User user, HttpSession session) {
-        User loginUser = userService.loginUser(user.getUserId(), user.getPassword());
+        User loginUser = (User) userService.loginUser(user.getUserId(), user.getPassword());
 
         Map<String, Object> response = new HashMap<>();
 
@@ -39,37 +41,35 @@ public class UserAPIController {
             // 401 : sql 에서 일치하는 값을 찾지 못했을 때 발생하는 에러
         }
     }
-
     //로그아웃
     @PostMapping("/logout")
     public ResponseEntity<Map<String, Object>> logout(HttpSession session) {
         session.invalidate();
         Map<String, Object> response = new HashMap<>();
         response.put("status", "logout");
-        return ResponseEntity.ok(response); //성공적으로 로그아웃이 됐다면 200
+        return ResponseEntity.ok(response); // 성공적으로 로그아웃이 됐다면 200
     }
-
-    //로그인 상태 확인 -> DB를 거치지 않고 오직 세션에서만 정보가 존재하는지 확인
+    // 로그인 상태 확인 -> DB를 거치지 않고 오직 세션에서만 정보가 존재하는지 확인
     @GetMapping("/checkLogin")
     public ResponseEntity<?> checkLogin(HttpSession session) {
         User loginUser = (User) session.getAttribute("user");
         if (loginUser != null) {
             return ResponseEntity.ok(loginUser);
-        }else{
-            return ResponseEntity.status(401).body(Map.of("message", "로그인 상태가 아닙니다"));
+        } else {
+            return ResponseEntity.status(401).body(Map.of("message", "로그인 상태가 아닙니다."));
         }
 
     }
 
-    //특정 유저 정보 조회 -> myPage
+    // 특정 유저 정보 조회 -> mypage
     @GetMapping("/{userId}")
     public ResponseEntity<?> findUserId(@PathVariable("userId") String userId) {
-        User user = userService.findUserId(userId);
+        User user = (User) userService.findUserId(userId);
 
         if (user != null) {
             return ResponseEntity.ok(user);
-        }else{
-            return ResponseEntity.status(404).body(Map.of("message", "로그인 상태가 아닙니다"));
+        } else {
+            return ResponseEntity.status(404).body(Map.of("message", "로그인 상태가 아닙니다."));
         }
     }
 }

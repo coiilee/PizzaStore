@@ -1,7 +1,7 @@
 package kh.academy.Pizza.service;
 
 import kh.academy.Pizza.mapper.UserMapper;
-import org.apache.catalina.User;
+import kh.academy.Pizza.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

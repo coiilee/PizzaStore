@@ -4,12 +4,12 @@
 <mapper namespace="kh.academy.Pizza.mapper.UserMapper">
 
 <!--    유저 정보 조회  -->
-<select id="">
+<select id="findUserId">
         SELECT  * FROM userss WHERE user_id = #{userId}
 </select>
 
 <!--    로그인 확인     -->
-<select id="">
+<select id="loginUser">
     SELECT * FROM userss WHERE user_id = #{userId} AND password = #{password}
 </select>
 
